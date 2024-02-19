@@ -109,6 +109,7 @@ class PhanSo {
   }
 }
 
+
 let PhanSo1 = new PhanSo(1,2);
 let PhanSo2 = new PhanSo(3,4);
 console.log(
