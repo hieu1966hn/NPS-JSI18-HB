@@ -15,6 +15,7 @@ registerForm.addEventListener("submit", (event) => {
 
     console.log(dataSignUp);
     // gọi hàm soát lỗi đăng ký người dùng
-    controller.register(dataSignUp);
     
+    // Trả về dữ liệu người dùng đã được lọc và gán lại vào biến dataSignUpClean
+    let dataSignUpClean = controller.register(dataSignUp);
 });

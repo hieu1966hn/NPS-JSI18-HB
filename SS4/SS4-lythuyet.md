@@ -13,3 +13,11 @@ BTVN B4: Responsive giao diện Login/Register.
 
 Nội dung buổi học số 5: 
 - Xây dựng tính năng xác thực người dùng với Firebase: Gmail/password, OTP(Phone number), facebook, github, Google.
+
+
+
+
+Buổi học số 6:
+- Chữa bài checkpoint1
+- Nhắc lại kiến thức buổi 4
+- 
