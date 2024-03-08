@@ -13,4 +13,45 @@ controller.register = (dataSignUp)=>{
         // Xóa hết nội dung trong thẻ div lỗi đó như sau:
         document.getElementById("first-name-error").innerText = "";
     }
+    
+    // Last name
+    if(dataSignUp.lastName == ""){
+        // Báo lỗi, hiển thị lỗi ở phía dưới thẻ input đó.
+        document.getElementById("last-name-error").innerText = "*Please input your last name";
+    }
+    else{
+        // Xóa hết nội dung trong thẻ div lỗi đó như sau:
+        document.getElementById("last-name-error").innerText = "";
+    }
+    // email 
+    if(dataSignUp.email == ""){
+        // Báo lỗi, hiển thị lỗi ở phía dưới thẻ input đó.
+        document.getElementById("email-error").innerText = "*Please input your email";
+    }
+    else{
+        // Xóa hết nội dung trong thẻ div lỗi đó như sau:
+        document.getElementById("email-error").innerText = "";
+    }
+    
+    // password
+    if(dataSignUp.password == ""){
+        // Báo lỗi, hiển thị lỗi ở phía dưới thẻ input đó.
+        document.getElementById("password-error").innerText = "*Please input your password";
+    }
+    else{
+        // Xóa hết nội dung trong thẻ div lỗi đó như sau:
+        document.getElementById("password-error").innerText = "";
+    }
+
+    //confirm password
+    if(dataSignUp.confirmPassword == ""){
+        // Báo lỗi, hiển thị lỗi ở phía dưới thẻ input đó.
+        document.getElementById("confirm-password-error").innerText = "*Please input your confirm password";
+    }
+    else{
+        // Xóa hết nội dung trong thẻ div lỗi đó như sau:
+        document.getElementById("confirm-password-error").innerText = "";
+    }
+
+    
 }
