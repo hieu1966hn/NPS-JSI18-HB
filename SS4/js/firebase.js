@@ -6,7 +6,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebas
 // TODO: Add SDKs for Firebase products that you want to use
  // https://firebase.google.com/docs/web/setup#available-libraries
 
- // Your web app's Firebase configuration
+ // Your web app's Firebase configuration (ko bao giờ thay đổi).
  const firebaseConfig = {
    apiKey: "AIzaSyC1x4GcFNc-BfGwdVsWmMETgGWZ6r5xEBQ",
    authDomain: "nps-jsi18-hb1.firebaseapp.com",

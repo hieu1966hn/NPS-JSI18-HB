@@ -1,4 +1,4 @@
-import {app, auth} from "./firebase.js"
+import { app, auth } from "./firebase.js";
 // Import các hàm tới từ firebase để lập trình tính năng xác thực người dùng
 import {
   createUserWithEmailAndPassword,
@@ -28,4 +28,20 @@ registerForm.addEventListener("submit", (event) => {
 
   // Trả về dữ liệu người dùng đã được lọc và gán lại vào biến dataSignUpClean
   let dataSignUpClean = controller.register(dataSignUp);
+
+  // Xây dựng phương thức xác thực người dùng với dữ liệu được nhận.
+  createUserWithEmailAndPassword(
+    auth,
+    dataSignUpClean.email,
+    dataSignUpClean.password
+  ).then((userCredential) => {
+    // Gửi email xác thực người dùng
+    sendEmailVerification(userCredential.user)
+      .then(() => {
+        console.log("Email verification sent!");
+      })
+      .catch((error) => {
+        console.log("Error signing up with email and password", error);
+      });
+  });
 });
