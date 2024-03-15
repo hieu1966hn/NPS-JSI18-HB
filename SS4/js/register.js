@@ -1,18 +1,19 @@
+import {app, auth} from "./firebase.js"
 // Import các hàm tới từ firebase để lập trình tính năng xác thực người dùng
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   sendEmailVerification,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-const auth = getAuth(app);
-
 const registerForm = document.getElementById("register-form");
+console.log("registerForm: ", registerForm);
 
 // Bắt sự kiện khi người dùng submit form
 registerForm.addEventListener("submit", (event) => {
   // Ngăn sự kiện reload mặc định của trình duyệt.
   event.preventDefault();
+
+  console.log("Đã vào bắt sự kiện submit");
 
   const dataSignUp = {
     firstName: registerForm.firstName.value.trim(),
