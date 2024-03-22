@@ -54,3 +54,7 @@ li{
 .deleteBtn{
     background-color: #ff6464;
 }
+
+.header h1{
+  background-color: transparent;
+}

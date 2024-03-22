@@ -1,6 +1,3 @@
-//  thiết kế lại kết nối firebase.
-// Import the functions you need from the SDKs you need
-
 import {
   addDoc,
   collection,
@@ -8,13 +5,9 @@ import {
   doc,
   getDocs,
   getFirestore,
-} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
 
-// import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
 
 // Your web app's Firebase configuration (ko bao giờ thay đổi).
 const firebaseConfig = {
@@ -26,48 +19,72 @@ const firebaseConfig = {
   appId: "1:99757781585:web:cb07bfcee927877a8dbe70",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig); // Khởi tạo firebase
-const db = getFirestore(app); // kết nối và khởi tạo firestore thành công
+const app = initializeApp(firebaseConfig); /// Khởi tạo firebase
+const db = getFirestore(app); /// Kết nối và khởi tạo database
 
-const taskInput = document.getElementById("taskInput"); // input
-const addTaskBtn = document.getElementById("addTaskBtn"); // button
-const taskList = document.getElementById("taskList"); // ul
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
 
-///// Xây dựng các hàm phù hợp
+// Function to render tasks
+function renderTasks(tasks) {
+  taskList.innerHTML = "";
+  tasks.forEach((task) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+            <span>${task.description}</span>
+            <button class="deleteBtn" data-id="${task.id}">Xóa</button>
+        `;
+    taskList.appendChild(li);
 
-//// Hàm render tasks
-function renderTasks(tasks){
-  
+    // Add event listener to delete button
+    const deleteBtn = li.querySelector(".deleteBtn");
+    deleteBtn.addEventListener("click", () => {
+      deleteTask(task.id); /// Hàm xóa task
+    });
+  });
 }
 
-//// Hàm cập nhật dữ liệu mới nhất trên db
+// Hàm cập nhật dữ liệu mới nhất trên db
 const getTasks = async () => {
   const querySnapshot = await getDocs(collection(db, "tasks"));
-
-  const tasks = querySnapshot.docs.map((doc) => {
-    id: doc.id;
-    description: doc.data().description;
-  });
-  renderTasks(tasks); ///// Cập nhật lại giao diện mới nhất theo đúng DB.
+  // console.log("querySnapshot: ", querySnapshot); /// Để xem nó là gì?
+  const tasks = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    description: doc.data().description,
+  }));
+  renderTasks(tasks); /// Cập nhật lại giao diện
 };
 
-//// Hàm thêm 1 task vào CSDL
+// Function to add a task to Firestore
 const addTask = async (description) => {
   await addDoc(collection(db, "tasks"), { description });
-  getTasks(); // Lấy dữ liệu mới nhất từ DB về web
+  getTasks(); /// Lấy dữ liệu mới nhất từ Database về web.
   taskInput.value = "";
 };
 
-//// Hàm xóa dữ liệu khi bấm nút X
+//// Hàm xóa dữ liệu khi bấm nút delete
+const deleteTask = (id) => {
+  const docRef = doc(db, "tasks", id);
 
-//// Hàm lắng nghe sự kiện khi người dùng click chuột vào nút thêm Task.
+  deleteDoc(docRef)
+    .then(() => {
+      console.log("Entire Document has been deleted successfully.");
+      getTasks(); /// Lấy dữ liệu mới nhất từ Database về web.
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// Lắng nghe sự kiện khi người dùng lick vào nút thêm task => gọi hàm thêm task vào database
 addTaskBtn.addEventListener("click", () => {
   const description = taskInput.value.trim();
   if (description !== "") {
-    addTask(description); /// Thêm mới 1 task vào cơ sở dữ liệu
+    addTask(description);
   }
 });
 
 // Gọi hàm lấy dữ liệu mới nhất từ database
 getTasks();
+
