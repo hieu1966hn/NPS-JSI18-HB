@@ -3,7 +3,7 @@
   text-align: center;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  
 }
 
 .header {
@@ -49,6 +49,7 @@ li{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #f0f0f0;
 }
 
 .deleteBtn{
